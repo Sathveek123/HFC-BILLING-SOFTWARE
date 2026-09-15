@@ -1,10 +1,11 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { MenuCategory, MenuItem } from '@/types';
 import { ItemRow } from './ItemRow';
 import { Trash2, GripVertical } from 'lucide-react';
 import { useAppState } from '@/lib/store';
+import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal';
 
 interface CategorySectionProps {
   category: MenuCategory;
@@ -18,15 +19,10 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
   onEditItem,
 }) => {
   const { deleteCategory } = useAppState();
-
-  const handleDeleteCategory = () => {
-    if (confirm(`Delete "${category.name}" and all its items?`)) {
-      deleteCategory(category.id);
-    }
-  };
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
-    <div className="bg-white border border-[#E5E7EB] rounded-xl mb-4 p-4 shadow-xs space-y-3">
+    <div className="bg-white border border-[#E5E7EB] rounded-xl mb-4 p-4 shadow-xs space-y-3 font-sans">
       {/* Category Header Row */}
       <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3">
         <h3 className="font-bold text-lg text-[#2563EB] uppercase tracking-wide">
@@ -43,8 +39,8 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
           </button>
           <button
             type="button"
-            onClick={handleDeleteCategory}
-            className="p-1 rounded-md text-red-600 hover:bg-red-50 cursor-pointer"
+            onClick={() => setShowDeleteModal(true)}
+            className="p-1 rounded-md text-red-600 hover:bg-red-50 cursor-pointer transition-colors"
             title="Delete Category"
           >
             <Trash2 className="w-5 h-5" />
@@ -64,6 +60,15 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
           </div>
         )}
       </div>
+
+      {/* Professional Confirm Delete Modal */}
+      <ConfirmDeleteModal
+        isOpen={showDeleteModal}
+        title="Delete Category"
+        message={`Are you sure you want to delete "${category.name}" and all its ${items.length} items? This action will remove them from your menu.`}
+        onConfirm={() => deleteCategory(category.id)}
+        onClose={() => setShowDeleteModal(false)}
+      />
     </div>
   );
 };

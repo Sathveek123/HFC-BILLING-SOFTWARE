@@ -15,6 +15,7 @@ import { BulkUploadReviewModal } from './components/modals/BulkUploadReviewModal
 import { AddCategoryModal } from './components/modals/AddCategoryModal';
 import { AddItemModal } from './components/modals/AddItemModal';
 import { AddMenuCardModal } from '@/components/menu/AddMenuCardModal';
+import { Toast } from '@/components/ui/Toast';
 
 import { extractMenuFromImage } from '@/lib/extractMenu';
 import { ExtractedMenuData } from '@/lib/menuAI';
@@ -314,13 +315,8 @@ export default function MenuDashboardPage() {
         onAddMenuCard={handleAddMenuCard}
       />
 
-      {/* TOAST NOTIFICATION */}
-      {toastMessage && (
-        <div className="fixed bottom-16 left-1/2 -translate-x-1/2 bg-[#111827] text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl z-50 flex items-center space-x-2 animate-in fade-in duration-200">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-          <span>{toastMessage}</span>
-        </div>
-      )}
+      {/* BOTTOM RIGHT TOAST NOTIFICATION */}
+      <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
 
     </div>
   );

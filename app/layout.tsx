@@ -4,8 +4,12 @@ import { AppStateProvider } from "@/lib/store";
 import { AppShell } from "@/components/layout/AppShell";
 
 export const metadata: Metadata = {
-  title: "HFC Billing Software — Restaurant POS & Inventory",
-  description: "Minimal, high-efficiency SaaS billing and restaurant inventory software for HFC.",
+  title: "HFC RESTAURANT - TINDI KLUBB | POS Billing & Management",
+  description: "Enterprise SaaS POS Billing, AI Menu Photo Scanner & Inventory Management for HFC Restaurant - Tindi Klubb.",
+  icons: {
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({
@@ -15,6 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logo.jpg" priority="true" />
+        <link rel="apple-touch-icon" href="/logo.jpg" />
+      </head>
       <body className="bg-white text-[#111827] antialiased">
         <AppStateProvider>
           <AppShell>{children}</AppShell>

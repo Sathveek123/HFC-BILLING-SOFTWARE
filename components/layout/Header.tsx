@@ -20,7 +20,10 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick, title }) => {
         >
           <Menu className="w-5 h-5" />
         </button>
-        <span className="font-bold text-[#111827] text-base">HFC Billing</span>
+        <div className="flex items-center space-x-2">
+          <img src="/logo.jpg" alt="HFC Logo" className="w-7 h-7 rounded-lg object-cover border border-[#E5E7EB]" />
+          <span className="font-bold text-[#111827] text-sm truncate">HFC RESTAURANT - TINDI KLUBB</span>
+        </div>
       </div>
 
       <div className="flex items-center space-x-2">

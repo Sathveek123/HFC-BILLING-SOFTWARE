@@ -32,7 +32,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ order, onClose }) =>
         <div id="printable-receipt" className="space-y-4 text-[#111827]">
           {/* Header */}
           <div className="text-center space-y-1 pb-3 border-b border-dashed border-gray-300">
-            <h2 className="text-base font-bold tracking-tight font-sans">HFC RESTAURANT</h2>
+            <h2 className="text-base font-bold tracking-tight font-sans">HFC RESTAURANT - TINDI KLUBB</h2>
             <p className="text-[11px] font-sans text-gray-600">Main Road, Food Street, City</p>
             <p className="text-[11px] font-sans text-gray-600">GSTIN: 36AAAAA0000A1Z5 | Ph: +91 98765 43210</p>
           </div>

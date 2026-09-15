@@ -108,13 +108,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, setMobileOpen }) =
         <div className="p-4 border-b border-[#E5E7EB] relative">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              {/* Avatar */}
-              <div className="w-10 h-10 rounded-full bg-[#4338CA] text-white flex items-center justify-center font-bold text-sm shadow-sm ring-2 ring-indigo-100">
-                HFC
-              </div>
+              {/* Logo Avatar */}
+              <img src="/logo.jpg" alt="HFC Logo" className="w-10 h-10 rounded-xl object-cover border border-[#E5E7EB] shadow-xs" />
               <div className="flex flex-col min-w-0">
-                <span className="text-sm font-semibold text-[#111827] truncate">HFC Restaurant</span>
-                <span className="text-xs text-[#9CA3AF] truncate">owner@hfcbilling.com</span>
+                <span className="text-xs font-bold text-[#111827] truncate">HFC RESTAURANT</span>
+                <span className="text-[11px] font-semibold text-[#2563EB] truncate">TINDI KLUBB</span>
               </div>
             </div>
             
