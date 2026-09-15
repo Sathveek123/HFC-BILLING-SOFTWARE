@@ -17,8 +17,47 @@ import {
 } from '@/types';
 
 // Initial state
-const INITIAL_CATEGORIES: MenuCategory[] = [];
-const INITIAL_MENU: MenuItem[] = [];
+const INITIAL_CATEGORIES: MenuCategory[] = [
+  { id: 'cat-1', name: 'FRIED RICE', sort_order: 1, menu_card: 'Main Menu' },
+  { id: 'cat-2', name: 'NOODLES', sort_order: 2, menu_card: 'Main Menu' },
+  { id: 'cat-3', name: 'CHINESE VEG', sort_order: 3, menu_card: 'Main Menu' },
+  { id: 'cat-4', name: 'CHINESE NON VEG', sort_order: 4, menu_card: 'Main Menu' },
+  { id: 'cat-5', name: 'BAGARA AND COMBOS', sort_order: 5, menu_card: 'Main Menu' },
+  { id: 'cat-6', name: 'CHICKEN BIRYANI', sort_order: 6, menu_card: 'Main Menu' },
+  { id: 'cat-7', name: 'BEVERAGES', sort_order: 7, menu_card: 'Beverages Menu' },
+];
+
+const INITIAL_MENU: MenuItem[] = [
+  // FRIED RICE
+  { id: 'm-1', category_id: 'cat-1', menu_card: 'Main Menu', name: 'Chicken Fried Rice', price: 240, half_price: 130, is_available: true, stock: 50 },
+  { id: 'm-2', category_id: 'cat-1', menu_card: 'Main Menu', name: 'Egg Fried Rice', price: 200, half_price: 110, is_available: true, stock: 50 },
+  { id: 'm-3', category_id: 'cat-1', menu_card: 'Main Menu', name: 'Veg Fried Rice', price: 180, half_price: 100, is_available: true, stock: 50 },
+  { id: 'm-4', category_id: 'cat-1', menu_card: 'Main Menu', name: 'Schezwan Chicken Fried Rice', price: 260, half_price: 140, is_available: true, stock: 50 },
+  { id: 'm-5', category_id: 'cat-1', menu_card: 'Main Menu', name: 'Paneer Fried Rice', price: 220, half_price: 120, is_available: true, stock: 50 },
+
+  // NOODLES
+  { id: 'm-6', category_id: 'cat-2', menu_card: 'Main Menu', name: 'Chicken Soft Noodles', price: 230, half_price: 125, is_available: true, stock: 50 },
+  { id: 'm-7', category_id: 'cat-2', menu_card: 'Main Menu', name: 'Veg Hakka Noodles', price: 170, half_price: 95, is_available: true, stock: 50 },
+  { id: 'm-8', category_id: 'cat-2', menu_card: 'Main Menu', name: 'Egg Noodles', price: 190, half_price: 105, is_available: true, stock: 50 },
+  { id: 'm-9', category_id: 'cat-2', menu_card: 'Main Menu', name: 'Schezwan Chicken Noodles', price: 250, half_price: 135, is_available: true, stock: 50 },
+
+  // CHINESE NON VEG
+  { id: 'm-10', category_id: 'cat-4', menu_card: 'Main Menu', name: 'Chilli Chicken (Dry/Gravy)', price: 280, half_price: 150, is_available: true, stock: 50 },
+  { id: 'm-11', category_id: 'cat-4', menu_card: 'Main Menu', name: 'Chicken 65', price: 290, half_price: 160, is_available: true, stock: 50 },
+  { id: 'm-12', category_id: 'cat-4', menu_card: 'Main Menu', name: 'Chicken Manchurian', price: 270, half_price: 145, is_available: true, stock: 50 },
+  { id: 'm-13', category_id: 'cat-4', menu_card: 'Main Menu', name: 'Pepper Chicken', price: 300, half_price: 165, is_available: true, stock: 50 },
+
+  // CHICKEN BIRYANI & BAGARA
+  { id: 'm-14', category_id: 'cat-6', menu_card: 'Main Menu', name: 'Special Chicken Dum Biryani', price: 290, half_price: 160, is_available: true, stock: 50 },
+  { id: 'm-15', category_id: 'cat-6', menu_card: 'Main Menu', name: 'Single Chicken Biryani', price: 170, half_price: null, is_available: true, stock: 50 },
+  { id: 'm-16', category_id: 'cat-5', menu_card: 'Main Menu', name: 'Bagara Rice with Chicken Curry Combo', price: 250, half_price: 135, is_available: true, stock: 50 },
+  { id: 'm-17', category_id: 'cat-5', menu_card: 'Main Menu', name: 'Unlimited Bagara Rice Combo', price: 220, half_price: null, is_available: true, stock: 50 },
+
+  // BEVERAGES
+  { id: 'm-18', category_id: 'cat-7', menu_card: 'Beverages Menu', name: 'Thums Up (750ml)', price: 50, half_price: null, is_available: true, stock: 100 },
+  { id: 'm-19', category_id: 'cat-7', menu_card: 'Beverages Menu', name: 'Sprite (750ml)', price: 50, half_price: null, is_available: true, stock: 100 },
+  { id: 'm-20', category_id: 'cat-7', menu_card: 'Beverages Menu', name: 'Fresh Lime Soda', price: 60, half_price: null, is_available: true, stock: 100 },
+];
 
 const INITIAL_TABLES: RestaurantTable[] = Array.from({ length: 10 }, (_, i) => ({
   id: `tbl-${i + 1}`,
@@ -141,16 +180,25 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   useEffect(() => {
     try {
       const savedMenus = localStorage.getItem('hfc_menus');
-      if (savedMenus) setMenus(JSON.parse(savedMenus));
+      if (savedMenus) {
+        const parsed = JSON.parse(savedMenus);
+        if (Array.isArray(parsed) && parsed.length > 0) setMenus(parsed);
+      }
 
       const savedActiveMenu = localStorage.getItem('hfc_active_menu');
       if (savedActiveMenu) setActiveMenu(JSON.parse(savedActiveMenu));
 
       const savedCategories = localStorage.getItem('hfc_categories');
-      if (savedCategories) setCategories(JSON.parse(savedCategories));
+      if (savedCategories) {
+        const parsed = JSON.parse(savedCategories);
+        if (Array.isArray(parsed) && parsed.length > 0) setCategories(parsed);
+      }
 
       const savedMenuItems = localStorage.getItem('hfc_menu_items');
-      if (savedMenuItems) setMenuItems(JSON.parse(savedMenuItems));
+      if (savedMenuItems) {
+        const parsed = JSON.parse(savedMenuItems);
+        if (Array.isArray(parsed) && parsed.length > 0) setMenuItems(parsed);
+      }
 
       const savedTables = localStorage.getItem('hfc_tables');
       if (savedTables) setTables(JSON.parse(savedTables));
