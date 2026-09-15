@@ -44,7 +44,7 @@ export default function OrderHistoryPage() {
       </div>
 
       {/* Orders Table */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-xs">
+      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-x-auto w-full shadow-xs">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="border-b border-[#E5E7EB] bg-[#F9FAFB] text-[#9CA3AF] uppercase text-[11px]">

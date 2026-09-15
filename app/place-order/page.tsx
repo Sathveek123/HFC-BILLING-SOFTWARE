@@ -101,7 +101,7 @@ export default function PlaceOrderPage() {
   };
 
   return (
-    <div className="h-[calc(100vh-4rem)] lg:h-[calc(100vh-2rem)] flex flex-col lg:flex-row gap-6 bg-white overflow-hidden font-sans">
+    <div className="min-h-screen lg:h-[calc(100vh-2rem)] flex flex-col lg:flex-row gap-6 bg-white overflow-y-auto lg:overflow-hidden font-sans pb-16 lg:pb-0">
       
       {/* LEFT: Menu Grid & Controls */}
       <div className="flex-1 flex flex-col min-w-0 bg-white space-y-4 overflow-y-auto pr-1">
